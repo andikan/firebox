@@ -32,6 +32,7 @@ $(document).ready(function() {
 				right: '-150',
 				opacity: 0
 			}, 1000);
+			window.navigator.vibrate([1000]);       
 		}
 	}
 
