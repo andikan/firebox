@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type='text/css'>
+#touchBox {
+	background-color: WhiteSmoke;
+	width: 350px;
+	height: 140px;
+}
+#stable {
+	position: relative;
+	background-color: red;
+	width: 140px;
+	height: 140px;
+}
+#reset_box {
+	background-color: WhiteSmoke;
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	left: 30%;
+	top: 30%;
+	border-radius: 150px;
+	text-align: center;
+	line-height: 300px;
+}
+</style>
+</head>
+<body>
+	<div id ='stable'>
+	</div>
+	<div id='touchBox'>
+		Hello!
+	</div>
+	<div id='reset_box'>
+		reset
+	</div>
+</body>
+<script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
+<script type='text/javascript'>
+$(document).ready(function(){
+
+//手機偵測速度
+window.addEventListener('devicemotion',deviceMotionHandler, false);
+
+
+function deviceMotionHandler(eventData) {
+  var acceleration =eventData.accelerationIncludingGravity;
+  var x = acceleration.x;
+  var y = acceleration.y;
+  var z = acceleration.z;
+
+  if(x>20){
+  	alert("Fire boom!!!!!");
+  }
+
+
+}
+
+
+});
+</script>
+</html>
