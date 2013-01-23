@@ -6,7 +6,6 @@ $(document).ready(function() {
 
 	var swing_timer = self.setInterval(swing, 560);
 
-
 	var startX,startY,endX,endY
 	var scrollTopVal=0; //左右滑动请自行修改
 	//假定接受手指触摸事件的Dom对象id是"touchring"
