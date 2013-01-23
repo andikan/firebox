@@ -1,0 +1,89 @@
+<html>
+<head>
+<style type='text/css'>
+#touchBox {
+	background-color: WhiteSmoke;
+	width: 350px;
+	height: 140px;
+}
+#stable {
+	position: relative;
+	background-color: red;
+	width: 140px;
+	height: 140px;
+}
+#reset_box {
+	background-color: WhiteSmoke;
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	left: 30%;
+	top: 30%;
+	border-radius: 150px;
+	text-align: center;
+	line-height: 300px;
+}
+</style>
+</head>
+<body>
+	<div id ='stable'>
+	</div>
+	<div id='touchBox'>
+		Hello!
+	</div>
+	<div id='reset_box'>
+		reset
+	</div>
+</body>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type='text/javascript'>
+$(document).ready(function(){
+
+document.body.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, false); 
+
+var startX,startY,endX,endY
+var scrollTopVal=0; //左右滑动请自行修改
+//假定接受手指触摸事件的Dom对象id是"touchBox"
+document.getElementById("touchBox").addEventListener("touchstart", touchStart, false);
+document.getElementById("touchBox").addEventListener("touchmove", touchMove, false);
+document.getElementById("touchBox").addEventListener("touchend", touchEnd, false);
+document.getElementById("reset_box").addEventListener("touchstart", reset, false);
+//里面getElementByIdx_x 中 x_x 是新浪自己加的，用的时候请去掉
+function touchStart(event){
+ var touch = event.touches[0];
+ startY = touch.pageY;
+ startX = touch.pageX;
+}
+function touchMove(event){
+ var touch = event.touches[0];
+ var touch2 = event.targetTouches[0];
+ endY = (startY-touch.pageY);
+ endX = (touch.pageX-startX);
+/*   if(scrollTopVal==0){
+$("#touchBox").scrollTop((endY+100));
+}else{
+        $("#touchBox").scrollTop(scrollTopVal+endY+100);
+} */
+if(endX > 15)
+{
+  var left=$("#stable").offset().left; 
+  $("#stable").css("left", left+50);
+  alert('you lunch firefoxfireboom!')
+}
+
+}
+
+function touchEnd(event){
+scrollTopVal=$("#touchBox").scrollTop();
+alert('end');
+}
+
+function reset(event){
+	$("#stable").css("left", 0);
+}
+
+});
+</script>
+</html>
