@@ -1,0 +1,14 @@
+html, body {
+	overflow: hidden;
+}
+
+.home {
+	background: url('../images/wild_oliva.png');
+
+}
+
+
+canvas {
+  width:  100%;
+  height: 100%; 
+}

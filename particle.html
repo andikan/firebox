@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Firefox OS App</title>
+	<link rel="stylesheet"  href="css/normalize.css" />
+	<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.2.0.css" />
+	<link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet"  href="css/particle.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.2.0.js"></script>
+</head>
+<body>
+<div data-role="page" class="home">
+	<div data-role="header" data-theme="a">
+		<h1>Firefox Crank</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<canvas id="canvas"></canvas>
+	</div><!-- /content -->
+</div>
+
+<script>
+var canvas = document.getElementById("canvas"),
+  ctx = canvas.getContext("2d"),
+  W = window.innerWidth * 1;
+  H = window.innerHeight * 1;
+
+canvas.width = W;
+canvas.height = H;
+
+var particles = [];
+
+//Lets create some particles now
+var particleCount = 500;
+for(var i = 0; i < particleCount; i++) {
+	particles.push(new particle());
+}
+
+function particle() {
+	//lets change the Y speed to make it look like a flame
+
+	var randNum = Math.round(Math.random()*3);
+	if(randNum === 3) this.speed = {x: -Math.random()*5, y: -Math.random()*5};
+	if(randNum === 2) this.speed = {x: Math.random()*5, y: Math.random()*5};
+	if(randNum === 1) this.speed = {x: -Math.random()*5, y: Math.random()*5};
+	if(randNum === 0) this.speed = {x: Math.random()*5, y: -Math.random()*5};
+
+	this.location_ = {x: W/2, y: H/2};
+
+	//radius range = 10-30
+	this.radius = 30+Math.random()*10;
+}
+
+function draw() {
+	//reset bg over each iteration
+	// var imageObj = new Image();
+	// imageObj.onload = function() {
+	//     var pattern = ctx.createPattern(imageObj, 'repeat');
+
+	//     ctx.rect(0, 0, canvas.width, canvas.height);
+	//     ctx.fillStyle = pattern;
+	//     ctx.fill();
+	// };
+	// imageObj.src = 'images/wild_oliva.png';
+
+	ctx.globalCompositeOperation = "copy";  //change
+	/* background */
+	var imageObj = new Image();
+	imageObj.onload = function() {
+	    var pattern = ctx.createPattern(imageObj, 'repeat');
+
+	    ctx.rect(0, 0, canvas.width, canvas.height);
+	    ctx.fillStyle = pattern;
+	    ctx.fill();
+	};
+	imageObj.src = 'images/wild_oliva.png';
+	// ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, W, H);
+	ctx.globalCompositeOperation = "lighter";
+	
+	for(var i = 0; i < particles.length; i++) {
+		var p = particles[i];
+		ctx.beginPath();
+
+		ctx.fillStyle = "rgb(215, 29, 29)";
+		ctx.arc(p.location_.x, p.location_.y, p.radius, Math.PI*2, false);
+		ctx.fill();
+
+		//decrement size
+		p.radius--;
+		p.location_.x += p.speed.x;
+		p.location_.y += p.speed.y;
+		
+		//regenerate particles
+		if(p.radius < 0)
+		{
+			//a brand new particle replacing the dead one
+			particles[i] = new particle();
+		}
+	}
+}
+
+var timer = setInterval(draw, 3);
+// setTimeout(stoptime, 5000);
+
+// function stoptime(){
+// 	$('#canvas').fadeOut('slow');
+// 	clearInterval(timer);
+// }
+</script>
+</body>
+</html>
