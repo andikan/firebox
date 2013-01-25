@@ -9,7 +9,6 @@ $(document).ready(function() {
 	// $('#myPopupDiv').popup("open")
 
 	var openSafe = 0;
-	fireyourself();
 
 	var socket = io.connect('http://firebox.herokuapp.com/'); 
 	socket.on('connect', function() {
@@ -24,8 +23,8 @@ $(document).ready(function() {
 				var audio = document.getElementById('fire-audio');
 				audio.volume = 1;
 				audio.play();
-				afterThrow();
 			} else{
+				// afterThrow();
 				$('#promptsafe').popup({ history: false }).popup("open");
 			}
 		}, false); 
@@ -151,5 +150,6 @@ $(document).ready(function() {
 	}
 
 	function fireyourself(){
+
 	}
 });
