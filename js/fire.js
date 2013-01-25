@@ -1,22 +1,22 @@
-var socket = io.connect('http://firebox.herokuapp.com/'); 
-socket.on('connect', function() {
-	socket.emit('addme',{name : prompt('Who are you?')}); 
-});
-
-window.addEventListener('load',function() { 
-	document.getElementById('sendtext').addEventListener('click',function() {
-		socket.emit('sendchat', {message : 1000});
-		// audio 
-		var audio = document.getElementById('fire');
-		audio.volume = 1;
-		audio.play();
-	}, false); 
-}, false);
-
 
 
 
 $(document).ready(function() {
+
+	var socket = io.connect('http://firebox.herokuapp.com/'); 
+	socket.on('connect', function() {
+		socket.emit('addme',{name : prompt('Who are you?')}); 
+	});
+
+	window.addEventListener('load',function() { 
+		document.getElementById('sendtext').addEventListener('click',function() {
+			socket.emit('sendchat', {message : 1000});
+			// audio 
+			var audio = document.getElementById('fire');
+			audio.volume = 1;
+			audio.play();
+		}, false); 
+	}, false);
  
 	function swing(){
 	 $('.grenade').toggleClass('grenade-swing');
