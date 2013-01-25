@@ -30,7 +30,7 @@ $(document).ready(function() {
 	document.getElementById("touchring").addEventListener("touchstart", touchStart, false);
 	document.getElementById("touchring").addEventListener("touchmove", touchMove, false);
 	document.getElementById("touchring").addEventListener("touchend", touchEnd, false);
-	document.getElementById("reset_box").addEventListener("touchstart", reset, false);
+	// document.getElementById("reset_box").addEventListener("touchstart", reset, false);
 
 	//手機偵測速度
 	window.addEventListener('devicemotion',deviceMotionHandler, false);
