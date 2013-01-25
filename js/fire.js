@@ -23,6 +23,7 @@ $(document).ready(function() {
 				var audio = document.getElementById('fire-audio');
 				audio.volume = 1;
 				audio.play();
+				afterThrow();
 			} else{
 				$('#promptsafe').popup({ history: false }).popup("open");
 			}
@@ -57,6 +58,7 @@ $(document).ready(function() {
 			var audio = document.getElementById('fire-audio');
 			audio.volume = 1;
 			audio.play();
+			afterThrow();
 		} else{
 			$('#promptsafe').popup({ history: false }).popup("open");
 		}
@@ -110,7 +112,7 @@ $(document).ready(function() {
 			time_count = time_count - 1;
 			if(time_count < 0){
 				$('.count').fadeOut();
-				clearInterval(time_count);
+				clearInterval(timecounter);
 				openSafe = 0;
 				time_count = 5;
 
@@ -122,10 +124,22 @@ $(document).ready(function() {
 			else{
 				$('.count span').html(time_count);
 				if(window.navigator){
-					window.navigator.vibrate([1000]);
+					window.navigator.vibrate([500]);
 				}
 			}
 		}
+	}
+
+	function afterThrow(){
+		$('.count').fadeOut();
+		clearInterval(timecounter);
+		openSafe = 0;
+		time_count = 5;
+
+		$(".ring").animate({
+			right: '+33',
+			opacity: 1
+		}, 500);
 	}
 
 
