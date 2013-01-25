@@ -2,19 +2,30 @@
 
 
 $(document).ready(function() {
+	// $('#promptname').popup({ history: false }).popup("open");
+	// $('#promptname-btn').on('click', function(){
+	// 	$('#promptname').popup("close");
+	// });
+	// $('#myPopupDiv').popup("open")
+
+	var openSafe = false;
 
 	var socket = io.connect('http://firebox.herokuapp.com/'); 
 	socket.on('connect', function() {
-		socket.emit('addme',{name : prompt('Who are you?')}); 
+		// socket.emit('addme',{name : prompt('Who are you?')}); 
 	});
 
 	window.addEventListener('load',function() { 
 		document.getElementById('sendtext').addEventListener('click',function() {
-			socket.emit('sendchat', {message : 1000});
-			// audio 
-			var audio = document.getElementById('fire-audio');
-			audio.volume = 1;
-			audio.play();
+			if(openSafe){
+				socket.emit('sendchat', {message : 1000});
+				// audio 
+				var audio = document.getElementById('fire-audio');
+				audio.volume = 1;
+				audio.play();
+			} else{
+				$('#promptsafe').popup({ history: false }).popup("open");
+			}
 		}, false); 
 	}, false);
  
@@ -40,12 +51,15 @@ $(document).ready(function() {
 	  var y = acceleration.y;
 	  var z = acceleration.z;
 	  if(x > 20){
-		socket.emit('sendchat', {message : 1000});
-		alert('motion : ' + x);
-		// audio 
-		var audio = document.getElementById('fire-audio');
-		audio.volume = 1;
-		audio.play();
+	  	if(openSafe){
+			socket.emit('sendchat', {message : 1000});
+			// audio 
+			var audio = document.getElementById('fire-audio');
+			audio.volume = 1;
+			audio.play();
+		} else{
+			$('#promptsafe').popup({ history: false }).popup("open");
+		}
 	  }
 	}
 
@@ -67,6 +81,7 @@ $(document).ready(function() {
 				right: '-150',
 				opacity: 0
 			}, 1000);
+			openSafe = true;
 			// $('.count').show('slow', function() {
 			//     // Animation complete.
 			//     window.navigator.vibrate([1000]);
@@ -78,6 +93,15 @@ $(document).ready(function() {
 		}
 	}
 
+	function touchEnd(event){
+		// scrollTopVal=$("#touchBox").scrollTop();
+		// alert('end');
+	}
+
+	function reset(event){
+		$("#stable").css("left", 0);
+	}
+
 	function startcounting(){
 		var time_count = 5;
 		$('.count').fadeIn();
@@ -87,20 +111,15 @@ $(document).ready(function() {
 			if(time_count < 0){
 				$('.count').fadeOut();
 				clearInterval(time_count);
+				openSafe = false;
 			}
 			else{
 				$('.count span').html(time_count);
+				if(window.navigator){
+					window.navigator.vibrate([1000]);
+				}
 			}
 		}
-	}
-
-	function touchEnd(event){
-		// scrollTopVal=$("#touchBox").scrollTop();
-		// alert('end');
-	}
-
-	function reset(event){
-		$("#stable").css("left", 0);
 	}
 
 

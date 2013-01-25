@@ -20,7 +20,7 @@
 
 	<div data-role="content">
 		<div class="grenade-wrapper">
-			<input type="button" id="sendtext" value="擲手榴彈" />
+			<input type="button" id="sendtext" value="擲手榴彈" data-theme="a">
 			<div class="grenade">
 				<div class="ring" id="touchring"></div>
 				<div class="count"><span>5</span></div>
@@ -32,7 +32,17 @@
 			</audio>
 		</div>
 	</div><!-- /content -->
+	<!-- <div data-role="popup" id="promptname" data-theme="a">
+		<h3>What is your name ?<h3>
+		<input type="text" name="name" placeholder="name">
+		<button id="promptname-btn" data-theme="a">ok</button>
+	</div> -->
+	 <div data-role="popup" id="promptsafe" data-theme="a">
+		<h3>向右滑開保險銷<h3>
+		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="info">OK</a>
+	</div>
 </div>
+
 <script src="http://firebox.herokuapp.com/socket.io/socket.io.js"></script>
 <script src="js/fire.js"></script>
 </body>
