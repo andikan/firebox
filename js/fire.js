@@ -8,7 +8,7 @@ $(document).ready(function() {
 	// });
 	// $('#myPopupDiv').popup("open")
 
-	var openSafe = false;
+	var openSafe = 0;
 
 	var socket = io.connect('http://firebox.herokuapp.com/'); 
 	socket.on('connect', function() {
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 	window.addEventListener('load',function() { 
 		document.getElementById('sendtext').addEventListener('click',function() {
-			if(openSafe){
+			if(openSafe == 1){
 				socket.emit('sendchat', {message : 1000});
 				// audio 
 				var audio = document.getElementById('fire-audio');
@@ -51,7 +51,7 @@ $(document).ready(function() {
 	  var y = acceleration.y;
 	  var z = acceleration.z;
 	  if(x > 20){
-	  	if(openSafe){
+	  	if(openSafe == 1){
 			socket.emit('sendchat', {message : 1000});
 			// audio 
 			var audio = document.getElementById('fire-audio');
@@ -81,7 +81,7 @@ $(document).ready(function() {
 				right: '-150',
 				opacity: 0
 			}, 1000);
-			openSafe = true;
+			openSafe = 1;
 			// $('.count').show('slow', function() {
 			//     // Animation complete.
 			//     window.navigator.vibrate([1000]);
@@ -111,9 +111,11 @@ $(document).ready(function() {
 			if(time_count < 0){
 				$('.count').fadeOut();
 				clearInterval(time_count);
-				openSafe = false;
+				openSafe = 0;
+				time_count = 5;
+
 				$(".ring").animate({
-					right: '+150',
+					right: '+33',
 					opacity: 1
 				}, 500);
 			}
