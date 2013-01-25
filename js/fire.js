@@ -67,7 +67,30 @@ $(document).ready(function() {
 				right: '-150',
 				opacity: 0
 			}, 1000);
-			window.navigator.vibrate([1000]);       
+			// $('.count').show('slow', function() {
+			//     // Animation complete.
+			//     window.navigator.vibrate([1000]);
+			//     var time_count = 5;
+			//     var time_count_interval = setInterval(counting, 1000);
+			//     window.navigator.vibrate([1000]);
+			// });
+			startcounting();
+		}
+	}
+
+	function startcounting(){
+		var time_count = 5;
+		$('.count').fadeIn();
+		var timecounter = setInterval(counting, 1000);
+		function counting(){
+			time_count = time_count - 1;
+			if(time_count < 0){
+				$('.count').fadeOut();
+				clearInterval(time_count);
+			}
+			else{
+				$('.count span').html(time_count);
+			}
 		}
 	}
 
