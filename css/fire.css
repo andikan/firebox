@@ -1,0 +1,44 @@
+h1 {
+	font-family: 'Armata', sans-serif;
+}
+
+.home {
+	background: url('../images/wild_oliva.png');
+}
+
+.grenade-wrapper {
+	width: 100%;
+}
+
+.grenade {
+	width: 213px;
+	height: 371px;
+	background: url('../images/g2.png');
+	margin: 0 auto;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	-moz-transform:rotate(3deg);
+	-webkit-transform:rotate(3deg);
+	-o-transform:rotate(3deg);
+	-ms-transform:rotate(3deg);
+}
+
+.grenade-swing {
+	-moz-transform:rotate(-5deg);
+	-webkit-transform:rotate(-5deg);
+	-o-transform:rotate(-5deg);
+	-ms-transform:rotate(-5deg);
+}
+
+
+.ring {
+	position: absolute;
+	top: 55px;
+	right: 33px;
+	width: 90px;
+	height: 97px;
+	background: url('../images/ring.png');
+}
