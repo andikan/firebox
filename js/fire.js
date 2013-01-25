@@ -12,7 +12,7 @@ $(document).ready(function() {
 		document.getElementById('sendtext').addEventListener('click',function() {
 			socket.emit('sendchat', {message : 1000});
 			// audio 
-			var audio = document.getElementById('fire');
+			var audio = document.getElementById('fire-audio');
 			audio.volume = 1;
 			audio.play();
 		}, false); 
@@ -43,7 +43,7 @@ $(document).ready(function() {
 		socket.emit('sendchat', {message : 1000});
 		alert('motion : ' + x);
 		// audio 
-		var audio = document.getElementById('fire');
+		var audio = document.getElementById('fire-audio');
 		audio.volume = 1;
 		audio.play();
 	  }
