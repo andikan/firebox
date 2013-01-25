@@ -22,6 +22,7 @@
 			#info:hover{ opacity: 1 }
 			a{ color: white; text-shadow: 0 1px 0 rgba( 0,0,0,.5 ) }
 		</style>
+		<script src="js/jquery.js"></script>
 </head>
 	<body>
 
@@ -320,7 +321,7 @@ float pnoise(vec3 P, vec3 rep)
 
 var container, renderer, scene, camera, mesh;
 var start = Date.now(), stats;
-var fov = 30;
+var fov = 100;
 
 window.addEventListener( 'load', init );
 
@@ -495,6 +496,17 @@ function render() {
 	
 }
 
+$(document).ready(function() {
+
+	var ff = 100;
+	var zoomtime = setInterval(zoomin, 20);
+
+	function zoomin(){
+		ff = ff - 1;
+		if(ff < 30) clearInterval(zoomtime);
+		camera.projectionMatrix.makePerspective( ff, window.innerWidth / window.innerHeight, 1, 1100 );
+	}
+});
 </script>
 
 	</body>
