@@ -13,6 +13,8 @@ else {
   var gAppID = '475868445804334';
 }
 
+var user = {};
+
 
 //Initialize the Facebook SDK
 //See https://developers.facebook.com/docs/reference/javascript/
@@ -55,6 +57,11 @@ function handleStatusChange(session) {
     var accessToken = session.authResponse.accessToken;
     console.log('uid : ' + uid);
     console.log('accessToken : ' + accessToken);
+    FB.api('/me', function(response) {
+       document.getElementById('user-info').innerHTML = '丟到' + response.name + '塗鴉牆 :';
+       user.name = response.name;
+       user.id = response.id;
+     });
   } else if (session.status === 'not_authorized') {
     // the user is logged in to Facebook, 
     // but has not authenticated your app
@@ -68,6 +75,42 @@ function handleStatusChange(session) {
 
 
 $(document).ready(function() {
+
+	var socket = io.connect('http://firebox.herokuapp.com/'); 
+	socket.on('connect', function() {
+		socket.emit('addme',{name : user}); 
+	});
+
+	window.addEventListener('load',function() { 
+		document.getElementById('sendtext').addEventListener('click',function() {
+			var postmsg = document.getElementById('postmsg').value;
+			FB.api('/me/feed', 'post', { message: postmsg }, function(response) {
+			  if (!response || response.error) {
+			    alert('Error occured');
+			  } else {
+			    alert('Post ID: ' + response.id);
+			  }
+			});
+
+			socket.emit('sendchat', {message : {
+				user: user,
+				msg: postmsg
+			}});
+
+			// if(openSafe == 1){
+			// 	socket.emit('sendchat', {message : 1000});
+			// 	// audio 
+			// 	var audio = document.getElementById('fire-audio');
+			// 	audio.volume = 1;
+			// 	audio.play();
+			// } else{
+			// 	// afterThrow();
+			// 	$('#promptsafe').popup({ history: false }).popup("open");
+			// }
+		}, false); 
+	}, false);
+
+
 	function swing(){
 	 $('.grenade').toggleClass('grenade-swing');
 	}
@@ -82,7 +125,7 @@ $(document).ready(function() {
 	document.getElementById("touchring").addEventListener("touchend", touchEnd, false);
 	document.getElementById("reset_box").addEventListener("touchstart", reset, false);
 
-	
+
 
 	function touchStart(event){
 		var touch = event.touches[0];
