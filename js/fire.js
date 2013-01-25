@@ -9,6 +9,7 @@ $(document).ready(function() {
 	// $('#myPopupDiv').popup("open")
 
 	var openSafe = 0;
+	fireyourself();
 
 	var socket = io.connect('http://firebox.herokuapp.com/'); 
 	socket.on('connect', function() {
@@ -115,11 +116,14 @@ $(document).ready(function() {
 				clearInterval(timecounter);
 				openSafe = 0;
 				time_count = 5;
+				$('.count span').html('5');
 
 				$(".ring").animate({
 					right: '+33',
 					opacity: 1
 				}, 500);
+
+				fireyourself();
 			}
 			else{
 				$('.count span').html(time_count);
@@ -135,6 +139,10 @@ $(document).ready(function() {
 		clearInterval(timecounter);
 		openSafe = 0;
 		time_count = 5;
+		$('.count span').html('5');
+
+		$(".grenade").fadeOut('slow');
+		$('#promptrestart').popup({ history: false }).popup("open");
 
 		$(".ring").animate({
 			right: '+33',
@@ -142,5 +150,6 @@ $(document).ready(function() {
 		}, 500);
 	}
 
-
+	function fireyourself(){
+	}
 });
