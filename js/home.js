@@ -1,4 +1,11 @@
 $(document).ready(function() {
+	function logorotate(){
+		$('.logo').toggleClass('logo-rotate');
+	}
+
+	var logoMoveTimer = setInterval(logorotate, 4000);
+	
+
     $('#fb-login').on("click", function(event){
         var permissions = ['publish_stream', 'email'];
         console.log('fb log');

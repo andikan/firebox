@@ -5,8 +5,8 @@
 //
 //////////////////////////
 
-if (window.location.host == 'facebookmobileweb.com' || window.location.host == 'www.facebookmobileweb.com') {
-  var gAppID = '147366981996453';
+if (window.location.host == 'andikan.in' || window.location.host == 'www.andikan.in') {
+  var gAppID = '398440393580515';
 }
 //Add your Application ID here
 else {
@@ -27,7 +27,7 @@ window.fbAsyncInit = function() {
     oauth: true
   });
 
-  
+
   // FB.getLoginStatus(handleStatusChange);
   // authUser();
   // checkForCredits();

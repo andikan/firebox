@@ -5,8 +5,8 @@
 //
 //////////////////////////
 
-if (window.location.host == 'facebookmobileweb.com' || window.location.host == 'www.facebookmobileweb.com') {
-  var gAppID = '147366981996453';
+if (window.location.host == 'andikan.in' || window.location.host == 'www.andikan.in') {
+  var gAppID = '398440393580515';
 }
 //Add your Application ID here
 else {
@@ -81,6 +81,8 @@ $(document).ready(function() {
 	document.getElementById("touchring").addEventListener("touchmove", touchMove, false);
 	document.getElementById("touchring").addEventListener("touchend", touchEnd, false);
 	document.getElementById("reset_box").addEventListener("touchstart", reset, false);
+
+	
 
 	function touchStart(event){
 		var touch = event.touches[0];
