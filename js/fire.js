@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 	var socket = io.connect('http://firebox.herokuapp.com/'); 
 	socket.on('connect', function() {
-		// socket.emit('addme',{name : prompt('Who are you?')}); 
+		socket.emit('addme',{name : prompt('Who are you?')}); 
 	});
 
 	window.addEventListener('load',function() { 
@@ -112,6 +112,10 @@ $(document).ready(function() {
 				$('.count').fadeOut();
 				clearInterval(time_count);
 				openSafe = false;
+				$(".ring").animate({
+					right: '+150',
+					opacity: 1
+				}, 500);
 			}
 			else{
 				$('.count span').html(time_count);
